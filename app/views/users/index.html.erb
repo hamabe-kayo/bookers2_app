@@ -38,7 +38,7 @@
         <tbody>
             <%@users.each do |user|%>
               <tr>
-                <td><%=attachment_image_tag user, :profile_image, :fill,20,20,fallback: "no_image_user"%></td>
+                <td><%=attachment_image_tag user, :profile_image, :fill,40,40,fallback: "no_image_user"%></td>
                 <td><%=user.name%></td>
                 <td><%=link_to "Show", "/users/#{user.id}"%></td>
               </tr>
