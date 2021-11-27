@@ -20,27 +20,27 @@ class BooksController < ApplicationController
   end
 
   def show
-    @newbook=Book.new
-    @user=current_user
     @book=Book.find(params[:id])
+    @newbook=Book.new
+    @user=@book.user
   end
 
   def edit
     @book=Book.find(params[:id])
-    unless @user == current_user
+    unless @book.user == current_user
       redirect_to books_path
     end
   end
 
   def update
-    @book.Book.find(params[:id])
-    if @user != current_user
+    @book=Book.find(params[:id])
+    if @book.user_id != current_user.id
       redirect_to book_path
     else
       if @book.update(book_params)
-        redirect_to book_path(@book.id), notice: "You have updated book successfully."
+        redirect_to book_path(@book), notice: "You have updated book successfully."
       else
-        render :index
+        render :edit
       end
     end
   end
